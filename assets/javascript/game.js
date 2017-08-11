@@ -5,25 +5,39 @@ var wrongGuesses = [];
 var correctGuesses = [];
 
 
+
+
+
+
 // User presses key to start.
-function startgame () {
-    wins: 0
-    remainingGuesses: 15
-    wrongGuesses: []
-    correctGuesses: []
-}
+    function youwin() {
+        wins++;
+        remainingGuesses = 15;
+        wrongGuesses: [];
+        partialWord;
+
+    }
+   
+    function youlose() {
+        remainingGuesses = 15;
+        wrongGuesses: [];
+        partialWord;
+    }
+
 
 // blanks are created
     
-    // var partialWord = "------".split(""); 
+    var partialWord = "------".split(""); 
+    // document.querySelector("#word").innerHTML = partialWord;
+    console.log (partialWord);
+
 
 // random word is selected
     function randomWord() {
-        var wordBank = ["pistol", "puzzle", "jumble", "document", "jumper", "zombie", "enzyme", "quiche", "jigsaw", "squeak"];
+        var wordBank = ["pistol", "puzzle", "jumble", "jumper", "zombie", "enzyme", "quiche", "jigsaw", "squeak"];
 
         var random = wordBank[Math.floor(Math.random() * wordBank.length)];
 
-        document.write(random);
         return random;
 
         
@@ -34,36 +48,55 @@ function startgame () {
 
     // blanks could be created here
     // We could use this instead of var partialWord = "------".split("");
-    for (var i = 0; i < word.length; i++) {
-    correctGuesses.push('_');
-    }
-
-// onkeyup function listen for key
+    // for (var i = 0; i < word.length; i++) {
+    // correctGuesses.push('_');
+    // }
 
 
+
+    // user types a letter
     document.onkeyup = function(event) {
         var userGuesses = event.key;
         var userGuess = userGuesses.toLowerCase();
+
+        document.getElementById("wins").innerHTML = wins;
+        document.getElementById("word").innerHTML = partialWord;
+
         console.log (userGuess);
 
         // error msg for non alphabet letters
         if(alphabet.indexOf(userGuess) == -1){
+            alert ("Please use the alphabet");
                 console.log("Please use the alphabet");
         }
 
         // initialize correctGuesses array with underscores
-        for (var i = 0; i < word.length; i++) {
-            correctGuesses.push('_');
-        }
+        // for (var i = 0; i < word.length; i++) {
+        //     correctGuesses.push('_');
+        // }
         
+        // probably not right below
+        // document.getElementById("correctGuesses").innerHTML
             
         // displays the letters not guessed correctly
         // letter isn't in word
         if (word.indexOf(userGuess) === -1) {
             // displays letter guessed
             wrongGuesses.push(userGuess);
-            wrongGuesses.innerHTML = wrongGuesses.join(', ');
+            // wrongGuesses.innerHTML = wrongGuesses.join (", ");
+            document.getElementById("wrongGuesses").innerHTML = wrongGuesses;
+            
+            document.getElementById("remainingGuesses").innerHTML = remainingGuesses;
+            remainingGuesses--;
+            
+            if (remainingGuesses === -1) {
+                youlose();
+                alert ("Game Over");
+            }
+
         } 
+
+
 
         // letter guessed is in word
         else { 
@@ -75,44 +108,36 @@ function startgame () {
                 }
 
             }  
-            // displays the partialWord 
-            word.innerHTML = partialWord.join(" ");
+            // displays the partialWord additions
+            document.querySelector("#word").innerHTML = partialWord.join(" ");
             console.log(partialWord.join(" "));
 
         }
             
         if (partialWord.indexOf("-") == -1) {
+               youwin();
+            
             console.log ("You Guessed It!");
         }
-
+    
+        
+           
+        
         
     };
 
-    startgame ();
+// document.querySelector("#wins").innerhtml = wins;
+// document.querySelector("#word").innerhtml = partialWord;
+// document.querySelector("#remainingGuesses").innerhtml = remainingGuesses;
 
-    var html = 
+// document.getElementById("wins").innerHTML = wins;
+// document.getElementById("word").innerHTML = partialWord;
+// document.getElementById("remainingGuesses").innerHTML = remainingGuesses;
 
-    "<p>Press Any Key To Get Started</p>"
-
-    "<p>Wins: " + wins + "</p>"
-
-    "<p>Current Word</p>"
-
-    correctGuesses
-
-    "<p>Number of Guesses Remaining</p>"
    
-    "<br>"
 
-    remainingGuesses
-   
-    "<br>"
-   
-    "<p>Letters Already Guessed</p>" 
 
-    "<br>"
-
-    wrongGuesses
+    
     
     
       
