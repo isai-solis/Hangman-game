@@ -16,6 +16,7 @@ var correctGuesses = [""];
         wrongGuesses = [];
         document.getElementById("wrongGuesses").innerHTML = wrongGuesses;
         randomWord();
+        console.log (word);
         // document.getElementById("word").innerHTML = word;
         
         console.log ("youwin");
@@ -28,6 +29,7 @@ var correctGuesses = [""];
         wrongGuesses = [];
         document.getElementById("wrongGuesses").innerHTML = wrongGuesses;
         randomWord();
+        console.log (word);
         // document.getElementById("word").innerHTML = word;
         
         console.log ("you lose");
@@ -40,6 +42,8 @@ var correctGuesses = [""];
     // document.querySelector("#word").innerHTML = partialWord;
     console.log (partialWord);
 
+    
+
 
 // random word is selected
     function randomWord() {
@@ -47,17 +51,17 @@ var correctGuesses = [""];
 
         var random = wordBank[Math.floor(Math.random() * wordBank.length)];
 
-        var word = randomWord();
-        console.log (word);
+        
 
-        document.getElementById("word").innerHTML = partialWord;
+        // document.getElementById("word").innerHTML = partialWord;
 
         // console.log (partialWord);
         return random;
 
     };
 
-
+    var word = randomWord();
+        console.log (word);
     
 
     // blanks could be created here
@@ -123,14 +127,14 @@ var correctGuesses = [""];
             
         if (partialWord.indexOf("-") === -1) {
                youwin();
-            
+            alert("Your Guessed It!");
             console.log ("You Guessed It!");
         }
     
         
            
         
-        
+         
     };
 
 // document.querySelector("#wins").innerhtml = wins;
