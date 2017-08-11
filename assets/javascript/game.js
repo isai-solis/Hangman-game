@@ -2,7 +2,7 @@ var wins = 0;
 var remainingGuesses = 15;
 var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var wrongGuesses = [];
-var correctGuesses = [];
+var correctGuesses = [""];
 
 
 
@@ -13,17 +13,26 @@ var correctGuesses = [];
     function youwin() {
         wins++;
         remainingGuesses = 15;
-        wrongGuesses: [];
-        partialWord;
+        wrongGuesses = [];
+        document.getElementById("wrongGuesses").innerHTML = wrongGuesses;
+        randomWord();
+        // document.getElementById("word").innerHTML = word;
+        
+        console.log ("youwin");
+
 
     }
    
     function youlose() {
         remainingGuesses = 15;
-        wrongGuesses: [];
-        partialWord;
-    }
+        wrongGuesses = [];
+        document.getElementById("wrongGuesses").innerHTML = wrongGuesses;
+        randomWord();
+        // document.getElementById("word").innerHTML = word;
+        
+        console.log ("you lose");
 
+    }
 
 // blanks are created
     
@@ -38,13 +47,18 @@ var correctGuesses = [];
 
         var random = wordBank[Math.floor(Math.random() * wordBank.length)];
 
+        var word = randomWord();
+        console.log (word);
+
+        document.getElementById("word").innerHTML = partialWord;
+
+        // console.log (partialWord);
         return random;
 
-        
     };
 
-    var word = randomWord();
-    console.log (word);
+
+    
 
     // blanks could be created here
     // We could use this instead of var partialWord = "------".split("");
@@ -70,14 +84,7 @@ var correctGuesses = [];
                 console.log("Please use the alphabet");
         }
 
-        // initialize correctGuesses array with underscores
-        // for (var i = 0; i < word.length; i++) {
-        //     correctGuesses.push('_');
-        // }
-        
-        // probably not right below
-        // document.getElementById("correctGuesses").innerHTML
-            
+       
         // displays the letters not guessed correctly
         // letter isn't in word
         if (word.indexOf(userGuess) === -1) {
@@ -89,7 +96,7 @@ var correctGuesses = [];
             document.getElementById("remainingGuesses").innerHTML = remainingGuesses;
             remainingGuesses--;
             
-            if (remainingGuesses === -1) {
+            if (remainingGuesses == -1) {
                 youlose();
                 alert ("Game Over");
             }
@@ -114,7 +121,7 @@ var correctGuesses = [];
 
         }
             
-        if (partialWord.indexOf("-") == -1) {
+        if (partialWord.indexOf("-") === -1) {
                youwin();
             
             console.log ("You Guessed It!");
