@@ -1,1 +1,2 @@
 # Hangman-game
+This a hangman game created using javascript in order to incorporate some basics of object orientated programming. There is a small word bank of 6 letter words, and the user gets 15 guesses before the game is over.    
